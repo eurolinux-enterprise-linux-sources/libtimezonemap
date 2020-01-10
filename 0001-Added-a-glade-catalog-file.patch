@@ -1,0 +1,103 @@
+From 9148e44277d558b6f0ca2882e8b511bc31c27f04 Mon Sep 17 00:00:00 2001
+From: David Shea <dshea@redhat.com>
+Date: Wed, 27 Nov 2013 11:22:42 -0500
+Subject: [PATCH 1/2] Added a glade catalog file.
+
+This allows CcTimezoneMap and CcTimezoneCompletion to be used in glade.
+---
+ Makefile.am           |  2 +-
+ configure.ac          |  1 +
+ glade/Makefile.am     |  2 ++
+ glade/TimezoneMap.xml | 47 +++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 glade/Makefile.am
+ create mode 100644 glade/TimezoneMap.xml
+
+diff --git a/Makefile.am b/Makefile.am
+index 960f89c..15740b2 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,6 @@
+ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
+ 
+-SUBDIRS = src
++SUBDIRS = src glade
+ 
+ DISTCHECK_CONFIGURE_FLAGS = --enable-localinstall
+ 
+diff --git a/configure.ac b/configure.ac
+index 46d26cd..4c079fc 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -79,6 +79,7 @@ AC_ARG_ENABLE(localinstall, AS_HELP_STRING([--enable-localinstall], [install all
+ 
+ AC_CONFIG_FILES([
+ Makefile
++glade/Makefile
+ src/Makefile
+ src/timezonemap.pc
+ ])
+diff --git a/glade/Makefile.am b/glade/Makefile.am
+new file mode 100644
+index 0000000..37bde31
+--- /dev/null
++++ b/glade/Makefile.am
+@@ -0,0 +1,2 @@
++gladedir        = $(datadir)/glade/catalogs
++dist_glade_DATA = TimezoneMap.xml
+diff --git a/glade/TimezoneMap.xml b/glade/TimezoneMap.xml
+new file mode 100644
+index 0000000..a43e925
+--- /dev/null
++++ b/glade/TimezoneMap.xml
+@@ -0,0 +1,47 @@
++<glade-catalog name="TimezoneMap"
++               version="0.4"
++               library="timezonemap"
++               domain="glade-3"
++               depends="gtk+">
++
++  <glade-widget-classes>
++    <glade-widget-class title="Timezone Map"
++                        name="CcTimezoneMap"
++                        icon-name="widget-gtk-image"
++                        generic-name="TimezoneMap">
++      <signals>
++        <signal id="location-changed"/>
++      </signals>
++    </glade-widget-class>
++
++    <glade-widget-class title="Timezone Entry Complection"
++                        name="CcTimezoneCompletion"
++                        generic-name="TimezoneCompletion">
++      <!-- From GtkEntryCompletion -->
++      <add-child-verify-function>glade_gtk_cell_layout_add_verify</add-child-verify-function>
++      <add-child-function>glade_gtk_cell_layout_add_child</add-child-function>
++      <remove-child-function>glade_gtk_cell_layout_remove_child</remove-child-function>
++      <get-children-function>glade_gtk_cell_layout_get_children</get-children-function>
++      <read-child-function>glade_gtk_cell_layout_read_child</read-child-function>
++      <write-child-function>glade_gtk_cell_layout_write_child</write-child-function>
++      <action-activate-function>glade_gtk_cell_layout_action_activate</action-activate-function>
++      <child-set-property-function>glade_gtk_cell_layout_set_child_property</child-set-property-function>
++      <child-get-property-function>glade_gtk_cell_layout_get_child_property</child-get-property-function>
++
++      <properties>
++        <property id="model" disabled="True"/>
++        <property id="text-column" disabled="True"/>
++        <property id="popup-set-width" disabled="True"/>
++      </properties>
++
++      <actions>
++        <action stock="gtk-edit" important="True" id="launch_editor" name="Edit&#8230;"></action>
++      </actions>
++    </glade-widget-class>
++  </glade-widget-classes>
++
++  <glade-widget-group name="timezonemap-misc-widgets" title="TimezoneMap Widgets">
++    <glade-widget-class-ref name="CcTimezoneMap"/>
++    <glade-widget-class-ref name="CcTimezoneCompletion"/>
++  </glade-widget-group>
++</glade-catalog>
+-- 
+1.9.0
+

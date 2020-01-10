@@ -1,0 +1,109 @@
+libtimezonemap (0.4.4) wily; urgency=medium
+
+  [ David Shea ]
+  * Update the SVG, generated new map images, and cleaned up a couple other
+    image-related issues.
+  * Constrain the location when clicking in the same spot.
+
+  [ Lars Uebernickel ]
+  * Port to libsoup directly for geoname requests, fix some memory leaks and
+    do not reuse GCancellables. (LP: #1440157)
+
+ -- Iain Lane <iain.lane@canonical.com>  Fri, 08 May 2015 00:18:37 +0100
+
+libtimezonemap (0.4.3) utopic; urgency=medium
+
+  * Add missing Breaks/Replaces for the -data split (LP: #1315452)
+
+ -- Adam Conrad <adconrad@ubuntu.com>  Fri, 02 May 2014 13:28:59 -0600
+
+libtimezonemap (0.4.2) utopic; urgency=medium
+
+  * Convert to multiarch.
+    + Use compat 9 and pass multiarch flags to configure
+    + Split arch-independent data out into a -data package
+    + Make library package Multi-Arch: same
+    + Install files into MA locations
+  * Bump S-V to 3.9.5, no changes required.
+
+ -- Iain Lane <iain.lane@canonical.com>  Fri, 02 May 2014 11:14:20 +0100
+
+libtimezonemap (0.4.1) trusty; urgency=low
+
+  [ Iain Lane ]
+  * Include countryInfo and admin1Codes from geonames (in addition to
+    cities15000 already shipped from there) and use them to provide "state"
+    and "full_country" properties.
+
+ -- Dmitrijs Ledkovs <xnox@ubuntu.com>  Tue, 05 Nov 2013 11:40:18 +0000
+
+libtimezonemap (0.4.0.2) saucy; urgency=low
+
+  * Allow using the tz data file from the build tree. Fixes amd64
+    builds.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Thu, 10 Oct 2013 15:19:03 +0100
+
+libtimezonemap (0.4.0.1) saucy; urgency=low
+
+  * Add Depends from the -dev package to packages the .pcfile Requires.
+
+ -- Iain Lane <iain.lane@canonical.com>  Tue, 23 Jul 2013 17:42:07 +0100
+
+libtimezonemap (0.4.0) raring; urgency=low
+
+  [ James M Leddy ]
+  * Simplfy setting location
+  * Use latitude/longitude for local cities as well (LP: #892370)
+  * Add m4 directory to prevent aclocal from complaining.
+  * Include cities with greater than 15000 people locally.
+
+  [ Dmitrijs Ledkovs ]
+  * Add original timezone svg map, thanks to Otto for finding it.
+  * Bump standards version to 3.9.4.
+  * Fix gir scanner options.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Thu, 28 Mar 2013 11:23:23 +0000
+
+libtimezonemap (0.3.2) precise; urgency=low
+
+  * Use AC_CHECK_LIBM. Thanks Loic Minier!
+  * Cycle through timezones on mouse clicks within a 10 pixel square box
+    of the previous click (LP: #905754).
+
+ -- Evan Dandrea <ev@ubuntu.com>  Mon, 27 Feb 2012 19:13:49 +0000
+
+libtimezonemap (0.3.1) precise; urgency=low
+
+  * Ship m4/ directory, which accidentally got dropped when making the
+    tarball for 0.3.  Fixes FTBFS 
+
+ -- Michael Terry <mterry@ubuntu.com>  Mon, 09 Jan 2012 15:53:35 +0100
+
+libtimezonemap (0.3) precise; urgency=low
+
+  * Fix crash when freeing CcTimezoneLocation objects
+  * Ship a .pc file
+  * Ship include headers
+  * Move .gir file from gir1.2-* package to *-dev package
+  * Add CcTimezoneCompletion from indicator-datetime
+
+ -- Michael Terry <mterry@ubuntu.com>  Mon, 09 Jan 2012 12:58:29 +0000
+
+libtimezonemap (0.2.1) precise; urgency=low
+
+  * Link with libm.
+
+ -- Matthias Klose <doko@ubuntu.com>  Sun, 04 Dec 2011 21:55:46 +0100
+
+libtimezonemap (0.2) oneiric; urgency=low
+
+  * Expose TzLocations as GObjects.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Tue, 09 Aug 2011 10:23:25 +0100
+
+libtimezonemap (0.1) oneiric; urgency=low
+
+  * Initial release.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Wed, 03 Aug 2011 10:21:41 +0100
